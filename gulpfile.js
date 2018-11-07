@@ -3,14 +3,14 @@ var sass = require('gulp-sass');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var autoprefixer = require('gulp-autoprefixer');
-
-
+var clean = require('gulp-clean');
 
 
 
 var SOURCEPATH = {
-  sassSource : "src/scss/*.scss",
-  htmlSource : "src/*.html",
+  sassSource : 'src/scss/*.scss',
+  htmlSource : 'src/*.html',
+  jsSource : 'src/js/**'
 }
 
 var APPPATH = {
@@ -20,10 +20,27 @@ var APPPATH = {
 
 }
 
-gulp.task('copy', function(){
-  return gulp.src(SOURCEPATH.htmlSource)
+gulp.task('clean-html', function(){
+  return gulp.src(APPPATH.root + '/*.html', {read: false, force: true})
+    .pipe(clean());
+});
+
+gulp.task('clean-scripts', function(){
+  return gulp.src(APPPATH.js + '/*.js', {read: false, force: true})
+    .pipe(clean());
+});
+
+gulp.task('scripts', ['clean-scripts'], function(){
+  gulp.src(SOURCEPATH.jsSource)
+    .pipe(gulp.dest(APPPATH.js));
+});
+
+gulp.task('copy', ['clean-html'], function(){
+  gulp.src(SOURCEPATH.htmlSource)
     .pipe(gulp.dest(APPPATH.root));
 });
+
+
 
 gulp.task('sass', function(){
   return gulp.src(SOURCEPATH.sassSource)
@@ -41,9 +58,10 @@ gulp.task('serve', ['sass'], function(){
   })
 });
 
-gulp.task('watch', ['serve', 'copy'], function(){
+gulp.task('watch', ['serve', 'copy', 'scripts'], function(){
   gulp.watch([SOURCEPATH.sassSource], ['sass']);
   gulp.watch([SOURCEPATH.htmlSource], ['copy']);
+  gulp.watch([SOURCEPATH.jsSource], ['scripts']);
 });
 
 gulp.task('default', ['watch'] );
