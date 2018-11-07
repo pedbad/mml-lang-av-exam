@@ -1,0 +1,19 @@
+{
+  "name": "mml-lang-av-exam",
+  "version": "1.0.0",
+  "description": "MML listening comprehension past paper exams template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedbad/mml-lang-av-exam.git"
+  },
+  "author": "Pedram Badakhchani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pedbad/mml-lang-av-exam/issues"
+  },
+  "homepage": "https://github.com/pedbad/mml-lang-av-exam#readme"
+}
