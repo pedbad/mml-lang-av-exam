@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/pedbad/mml-lang-av-exam/issues"
   },
-  "homepage": "https://github.com/pedbad/mml-lang-av-exam#readme"
+  "homepage": "https://github.com/pedbad/mml-lang-av-exam#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.2"
+  }
 }
