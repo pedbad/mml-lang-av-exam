@@ -3,7 +3,10 @@ var sass = require('gulp-sass');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var autoprefixer = require('gulp-autoprefixer');
+var browserify = require('gulp-browserify');
 var clean = require('gulp-clean');
+var concat = require('gulp-concat');
+var orderedStreams = require('ordered-read-streams');
 
 
 
@@ -32,6 +35,8 @@ gulp.task('clean-scripts', function(){
 
 gulp.task('scripts', ['clean-scripts'], function(){
   gulp.src(SOURCEPATH.jsSource)
+    .pipe(concat('main.js'))
+    .pipe(browserify())
     .pipe(gulp.dest(APPPATH.js));
 });
 
@@ -43,11 +48,16 @@ gulp.task('copy', ['clean-html'], function(){
 
 
 gulp.task('sass', function(){
-  return gulp.src(SOURCEPATH.sassSource)
+  var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
+  var sassFiles;
+
+  sassFiles = gulp.src(SOURCEPATH.sassSource)
     .pipe(autoprefixer())
-    //.pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(gulp.dest(APPPATH.css));
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    //.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    return orderedStreams([bootstrapCSS, sassFiles])
+      .pipe(concat('app.css'))
+      .pipe(gulp.dest(APPPATH.css));
 });
 
 gulp.task('serve', ['sass'], function(){
