@@ -19,7 +19,9 @@ var SOURCEPATH = {
 var APPPATH = {
   root : 'app/',
   css : 'app/css',
-  js : 'app/js'
+  js : 'app/js',
+  webfonts: 'app/webfonts',
+  mediaelement: 'app/mediaelement'
 
 }
 
@@ -48,6 +50,7 @@ gulp.task('copy', ['clean-html'], function(){
 
 
 gulp.task('sass', function(){
+  var fontawesomeCSS = gulp.src('./node_modules/@fortawesome/fontawesome-free/css/all.css');
   var bootstrapCSS = gulp.src('./node_modules/bootstrap/dist/css/bootstrap.css');
   var sassFiles;
 
@@ -55,10 +58,23 @@ gulp.task('sass', function(){
     .pipe(autoprefixer())
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     //.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    return orderedStreams([bootstrapCSS, sassFiles])
+    return orderedStreams([fontawesomeCSS, bootstrapCSS, sassFiles])
       .pipe(concat('app.css'))
       .pipe(gulp.dest(APPPATH.css));
 });
+
+
+// Move Fonts to src/fonts
+gulp.task('move-fonts', function() {
+  return gulp.src(['./node_modules/@fortawesome/fontawesome-free/webfonts/*.{eot,svg,ttf,woff,woff2}'])
+    .pipe(gulp.dest(APPPATH.webfonts))
+})
+
+// Move mediaelement to src/mediaelement
+gulp.task('mediaelement', function() {
+  return gulp.src('node_modules/mediaelement/build/**')
+    .pipe(gulp.dest(APPPATH.mediaelement))
+})
 
 gulp.task('serve', ['sass'], function(){
   browserSync.init([APPPATH.css + '/*.css', APPPATH.root + '/*.html', APPPATH.js + '/*.js'], {
@@ -68,7 +84,7 @@ gulp.task('serve', ['sass'], function(){
   })
 });
 
-gulp.task('watch', ['serve', 'copy', 'scripts'], function(){
+gulp.task('watch', ['serve', 'copy', 'scripts', 'move-fonts', 'mediaelement'], function(){
   gulp.watch([SOURCEPATH.sassSource], ['sass']);
   gulp.watch([SOURCEPATH.htmlSource], ['copy']);
   gulp.watch([SOURCEPATH.jsSource], ['scripts']);
