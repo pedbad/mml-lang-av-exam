@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>LC Online - Listening comprehension past papers </title>
+  <title>LC Online - Listening comprehension past papers</title>
+  <link rel="stylesheet" href="mediaelement/mediaelementplayer.min.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body id="home" data-spy="scroll" data-target="#main-nav">
@@ -49,56 +50,14 @@
   </section>
 
 
-
-
-
-
-
-
-
-
-  <!-- ABOUT / WHY SECTION -->
-  <section id="about" class="pt-1 pb-5 bg-light">
+  <!-- EXAMS ACCORDION -->
+  <section class="pt-1 pb-5 bg-light">
     <div class="container">
       <div class="row">
         <div class="col">
           <!-- ACCORDION -->
-          <div id="accordion" role="tablist">
-            <div class="card">
-              <div class="card-header" role="tab" id="heading" data-parent="#accordion" data-toggle="collapse" data-target="#collapse1" style="cursor: pointer;">
-                <h5 class="mb-0"><a href="#collapse1" data-parent="#accordion" data-toggle="collapse">
-                  2017: Maternidad tardía
-                </a></h5>
-              </div><!-- eof card-header -->
-
-              <div id="collapse1" class="collapse">
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet.
-                </div><!-- eof card-body -->
-              </div><!-- eof collapse1 -->
-            </div><!-- eof card -->
-
-            <div class="card">
-              <div class="card-header" role="tab" id="heading" data-parent="#accordion" data-toggle="collapse" data-target="#collapse2" style="cursor: pointer;">
-                <h5 class="mb-0"><a href="#collapse2" data-parent="#accordion" data-toggle="collapse">
-                  2016: Semillas de Uruguay
-                </a></h5>
-              </div><!-- eof card-header -->
-
-              <div id="collapse2" class="collapse">
-                <div class="card-body">
-                  Lorem ipsum dolor sit amet.
-                </div><!-- eof card-body -->
-              </div><!-- eof collapse2 -->
-            </div><!-- eof card -->
-
-
-
-
-
-
-
-
+          <div id="accordion" class="accordion" role="tablist">
+            <!-- load content for exam 2017 id is #exam2017 -->
           </div><!-- eof accordion -->
         </div><!-- eof col -->
 
@@ -106,7 +65,7 @@
     </div><!-- eof  container -->
   </section>
 
-  <div style="margin-top:500px;"></div>
+
 
 
 
@@ -142,6 +101,35 @@
 
 
 
+
+   <!-- MODAL -->
+    <div class="modal" id="creditsModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-info">Credits</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                  <h5 class="text-secondary">Language Centre Online</h5>
+                  <p>Developed by the University of Cambridge Language Centre for LC Online which supports the teaching and learning of languages throughout the University.</p>
+
+                    <hr>
+                    <small>This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 2.0 UK: England &amp; Wales Licence.To view a copy of this licence, visit: <a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/2.0/uk/">creativecommons.org</a>.</small>
+                    <hr>
+                    <small>2019 © University of Cambridge Language Centre.</small>
+                </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
